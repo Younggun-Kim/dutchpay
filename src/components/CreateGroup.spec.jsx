@@ -1,4 +1,5 @@
 import userEvent from "@testing-library/user-event";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import { CreateGroup } from "./CreateGroup";
 import { RecoilRoot } from "recoil";

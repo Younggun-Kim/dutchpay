@@ -14,7 +14,7 @@ const App = () => {
         <Routes>
           <Route path="" element={<CreateGroup />} />
           <Route path="/members" element={<AddMembers />} />
-          <Route path="/members" element={<ExpenseMain />} />
+          <Route path="/expense" element={<ExpenseMain />} />
         </Routes>
       </RecoilRoot>
     </BrowserRouter>
