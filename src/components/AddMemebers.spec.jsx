@@ -40,8 +40,7 @@ describe("멤버 등록 페이지", () => {
 
     await userEvent.type(input, "철수 영희 영수");
     await userEvent.click(saveButton);
-
-    const errorMessage = await screen.findByText(
+    const errorMessage = screen.queryByText(
       "그룹 멤버들의 이름을 입력해주세요."
     );
 

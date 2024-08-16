@@ -29,6 +29,7 @@ export const AddMembers = () => {
             </Row>
 
             <InputTags
+              data-testid="input-member-names"
               placeholder="이름 간 띄워쓰기"
               onTags={(value) => setGroupMembers(value.values)}
             />
