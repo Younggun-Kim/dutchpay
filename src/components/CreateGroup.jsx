@@ -31,7 +31,7 @@ export const CreateGroup = () => {
       validate={validate}
       handleSubmit={handleSubmit}
     >
-      <Form.Group controlId="validationGroupName">
+      <Form.Group>
         <Form.Control
           type="text"
           required

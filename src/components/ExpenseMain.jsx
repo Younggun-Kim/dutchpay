@@ -1,10 +1,11 @@
 import React from "react";
+import { AddExpenseForm } from "./AddExpenseForm";
 
 export const ExpenseMain = () => {
   return (
     <div>
       <div>
-        {/* TODO: 비용 추가 폼 */}
+        <AddExpenseForm />
         {/* TODO: 정산 결과 컴포넌트 렌더링 */}
       </div>
 
