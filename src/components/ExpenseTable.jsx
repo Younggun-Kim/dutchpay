@@ -1,11 +1,11 @@
 import { useRecoilValue } from "recoil";
-import { expansesState } from "../state/expanses";
+import { expensesState } from "../state/expenses";
 import { Table } from "react-bootstrap";
 import { OverlayWrapper } from "./shared/OverlayWrapper";
 import { styled } from "styled-components";
 
 export const ExpenseTable = () => {
-  const expenses = useRecoilValue(expansesState);
+  const expenses = useRecoilValue(expensesState);
 
   return (
     <OverlayWrapper minHeight={"73vh"}>

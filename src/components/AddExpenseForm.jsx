@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { expansesState } from "../state/expanses";
+import { expensesState } from "../state/expenses";
 import { groupMembersState } from "../state/groupMemebers";
 import { styled } from "styled-components";
 
@@ -25,7 +25,7 @@ export const AddExpenseForm = () => {
   const [isPayerValid, setIsPayerValid] = useState(false);
 
   const members = useRecoilValue(groupMembersState);
-  const setExpanse = useSetRecoilState(expansesState);
+  const setExpanse = useSetRecoilState(expensesState);
 
   const checkForValidity = () => {
     const descValid = desc.length > 0;
@@ -44,7 +44,7 @@ export const AddExpenseForm = () => {
       const newExpanse = {
         date,
         desc,
-        amount,
+        amount: parseInt(amount),
         payer,
       };
       setExpanse((expanse) => [...expanse, newExpanse]);
@@ -120,7 +120,6 @@ export const AddExpenseForm = () => {
                   <option disabled value="">
                     누가 결제했나요?
                   </option>
-                  <option value="영수">영수</option>
                   {members.map((member) => (
                     <option key={member} value={member}>
                       {member}

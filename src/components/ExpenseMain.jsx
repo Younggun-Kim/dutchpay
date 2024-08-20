@@ -5,6 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { styled } from "styled-components";
 import { groupNameState } from "../state/groupName";
 import { useRecoilValue } from "recoil";
+import { SettlementSummary } from "./SettlementSummary";
+import { ServiceLogo } from "./shared/ServiceLogo";
 
 export const ExpenseMain = () => {
   return (
@@ -24,8 +26,15 @@ export const ExpenseMain = () => {
 const LeftPane = () => {
   return (
     <Container>
-      {/* TODO: 정산 결과 컴포넌트 렌더링 */}
-      <AddExpenseForm />
+      <Row>
+        <ServiceLogo />
+      </Row>
+      <Row>
+        <AddExpenseForm />
+      </Row>
+      <Row>
+        <SettlementSummary />
+      </Row>
     </Container>
   );
 };
