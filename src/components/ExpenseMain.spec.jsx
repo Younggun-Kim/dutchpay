@@ -150,5 +150,22 @@ describe("비용 정산 메인 페이지", () => {
       const payerInput = within(listComponent).getByText("영수");
       expect(payerInput).toBeInTheDocument();
     });
+
+    test("정산 결과 또한 업데이트가 된다", async () => {
+      await addNewExpense();
+
+      const totalText = screen.getByText(/2명 - 총 30000 원 지출/);
+      expect(totalText).toBeInTheDocument();
+
+      const transactionText = screen.getByText(/영희가 영수에게 15000원/);
+      expect(transactionText).toBeInTheDocument();
+    });
+  });
+
+  describe("비용 정산 결과 컴포넌트", () => {
+    test("정산 결과 컴포넌트가 렌더링 되는가?", () => {
+      const component = screen.getByText(/정산은 이렇게/i);
+      expect(component).toBeInTheDocument();
+    });
   });
 });
