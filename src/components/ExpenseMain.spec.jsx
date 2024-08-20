@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
 import { ExpenseMain } from "./ExpenseMain";
 import userEvent from "@testing-library/user-event";
@@ -97,6 +97,58 @@ describe("비용 정산 메인 페이지", () => {
       expect(payErrorMessage).toHaveAttribute("data-valid", "true");
 
       expect(amountErrorMessage).toHaveAttribute("data-valid", "true");
+    });
+  });
+
+  describe("비용 리스트 컴포넌트", () => {
+    test("비용 리스트 컴포넌트가 렌더링 되었는가?", () => {
+      renderComponent();
+
+      const listComponent = screen.getByTestId("expenseList");
+      expect(listComponent).toBeInTheDocument();
+    });
+
+    test("비용 데이터가 존재하는 경우, 날짜, 내용, 결제자, 금액 데이터가 보여지는가?", () => {
+      renderComponent();
+
+      const listComponent = screen.getByTestId("expenseList");
+    });
+  });
+
+  describe("새로운 비용이 입력되었을 때", () => {
+    const addNewExpense = async () => {
+      const {
+        dateInput,
+        descriptionInput,
+        payerInput,
+        amountInput,
+        addButton,
+      } = renderComponent();
+
+      await userEvent.type(dateInput, "2024-08-20");
+      await userEvent.type(descriptionInput, "장보기");
+      await userEvent.clear(amountInput);
+      await userEvent.type(amountInput, "30000");
+      await userEvent.selectOptions(payerInput, "영수");
+      await userEvent.click(addButton);
+    };
+    test("날짜, 내용, 결제자, 금액 데이터가 정산 리스트에 추가 된다.", async () => {
+      await addNewExpense();
+
+      const listComponent = screen.getByTestId("expenseList");
+
+      // 새로운 비용을 입력
+      const dateValue = within(listComponent).getByText("2024-08-20");
+      expect(dateValue).toBeInTheDocument();
+
+      const descValue = within(listComponent).getByText("장보기");
+      expect(descValue).toBeInTheDocument();
+
+      const amountValue = within(listComponent).getByText("30000 원");
+      expect(amountValue).toBeInTheDocument();
+
+      const payerInput = within(listComponent).getByText("영수");
+      expect(payerInput).toBeInTheDocument();
     });
   });
 });
