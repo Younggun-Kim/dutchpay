@@ -1,7 +1,7 @@
 import React from "react";
 import { AddExpenseForm } from "./AddExpenseForm";
 import { ExpenseTable } from "./ExpenseTable";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Stack } from "react-bootstrap";
 import { styled } from "styled-components";
 import { groupNameState } from "../state/groupName";
 import { useRecoilValue } from "recoil";
@@ -26,34 +26,42 @@ export const ExpenseMain = () => {
 const LeftPane = () => {
   return (
     <Container>
-      <Row>
-        <ServiceLogo />
-      </Row>
-      <Row>
-        <AddExpenseForm />
-      </Row>
-      <Row>
-        <SettlementSummary />
-      </Row>
+      <StyledGapRow>
+        <Row>
+          <ServiceLogo />
+        </Row>
+        <Row>
+          <AddExpenseForm />
+        </Row>
+        <Row>
+          <SettlementSummary />
+        </Row>
+      </StyledGapRow>
     </Container>
   );
 };
 
+const StyledGapRow = styled(Row)`
+  gap: 5vh;
+  padding: 90px 0 0 0;
+  justify-content: center;
+`;
+
 const RightPane = () => {
   const groupName = useRecoilValue(groupNameState);
   return (
-    <StyledContainer>
+    <StyledRightPaneWrapper>
       <Row>
         <StyledGroupName>{groupName || "그룹명"}</StyledGroupName>
       </Row>
       <Row>
         <ExpenseTable />
       </Row>
-    </StyledContainer>
+    </StyledRightPaneWrapper>
   );
 };
 
-const StyledContainer = styled(Container)`
+const StyledRightPaneWrapper = styled(Container)`
   padding: 100px 32px;
 `;
 

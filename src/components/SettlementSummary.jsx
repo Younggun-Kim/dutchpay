@@ -1,6 +1,8 @@
 import { useRecoilValue } from "recoil";
 import { expensesState } from "../state/expenses";
 import { groupMembersState } from "../state/groupMemebers";
+import styled from "styled-components";
+import { StyledTitle } from "./AddExpenseForm";
 
 export const calculateMinimumTransaction = (
   members,
@@ -93,16 +95,19 @@ export const SettlementSummary = () => {
   );
 
   return (
-    <div>
-      <h3>2. 정산은 이렇게</h3>
+    <StyledWrapper>
+      <StyledTitle>2. 정산은 이렇게</StyledTitle>
       {totalExpenseAmount > 0 && groupMembersCount > 0 && (
         <>
-          <span>
-            {groupMembersCount} 명이서 총 {totalExpenseAmount} 원 지출
-          </span>
-          <span>한 사람 당 {splitAmount}원</span>
+          <StyledSummary>
+            <span>
+              {groupMembersCount} 명이서 총 {totalExpenseAmount} 원 지출
+            </span>
+            <br />
+            <span>한 사람 당 {splitAmount}원</span>
+          </StyledSummary>
 
-          <ul>
+          <StyledUl>
             {minimumTransaction.map(({ receiver, sender, amount }, index) => (
               <li key={index}>
                 <span>
@@ -110,9 +115,41 @@ export const SettlementSummary = () => {
                 </span>
               </li>
             ))}
-          </ul>
+          </StyledUl>
         </>
       )}
-    </div>
+    </StyledWrapper>
   );
 };
+
+const StyledWrapper = styled.div`
+  padding: 50px;
+  background-color: #683ba1;
+  box-shadow: 3px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  color: #fffbfb;
+  text-align: center;
+  font-size: 22px;
+`;
+
+const StyledSummary = styled.div`
+  margin-top: 31px;
+`;
+
+const StyledUl = styled.ul`
+  margin-top: 31px;
+  list-style: none;
+  padding: 0;
+  font-weight: 500;
+  list-style-type: disclosure-closed;
+
+  li::marker {
+    animation: blinker 1.5s linear infinite;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+`;

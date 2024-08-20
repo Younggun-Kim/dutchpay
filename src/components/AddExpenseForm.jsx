@@ -53,93 +53,88 @@ export const AddExpenseForm = () => {
     setFormValidate(true);
   };
   return (
-    <div>
-      <StylesWrapper>
-        <Form noValidate onSubmit={handleSubmit}>
-          <StyledTitle>1. 비용 추가</StyledTitle>
-          <Row>
-            <Col xs={12}>
-              <StyledGroup>
-                <Form.Control
-                  type="date"
-                  name="expenseDate"
-                  value={date}
-                  onChange={(event) => setDate(event.target.value)}
-                  placeholder="결제한 날짜를 선택해 주세요"
-                ></Form.Control>
-              </StyledGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <StyledGroup>
-                <Form.Control
-                  type="text"
-                  name="expenseDescription"
-                  value={desc}
-                  onChange={(event) => setDesc(event.target.value)}
-                  placeholder="비용에 대한 설명을 입력해 주세요"
-                  isValid={isDescValid}
-                  isInvalid={!isDescValid && formValidate}
-                ></Form.Control>
-                <Form.Control.Feedback type="invalid" data-valid={isDescValid}>
-                  비용 내용을 입력해 주셔야 됩니다.
-                </Form.Control.Feedback>
-              </StyledGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} lg={6}>
-              <StyledGroup>
-                <Form.Control
-                  type="number"
-                  name="expenseAmount"
-                  value={amount}
-                  onChange={(event) => setAmount(event.target.value)}
-                  placeholder="비용은 얼마였나요?"
-                  isValid={isAmountValid}
-                  isInvalid={!isAmountValid && formValidate}
-                ></Form.Control>
-                <Form.Control.Feedback
-                  type="invalid"
-                  data-valid={isAmountValid}
-                >
-                  금액을 입력해 주셔야 합니다.
-                </Form.Control.Feedback>
-              </StyledGroup>
-            </Col>
-            <Col xs={12} lg={6}>
-              <StyledGroup>
-                <Form.Select
-                  name="expensePayer"
-                  defaultValue=""
-                  isValid={isPayerValid}
-                  isInvalid={!isPayerValid && formValidate}
-                  onChange={(event) => setPayer(event.target.value)}
-                >
-                  <option disabled value="">
-                    누가 결제했나요?
+    <StylesWrapper>
+      <Form noValidate onSubmit={handleSubmit}>
+        <StyledTitle>1. 비용 추가</StyledTitle>
+        <Row>
+          <Col xs={12}>
+            <StyledGroup>
+              <Form.Control
+                type="date"
+                name="expenseDate"
+                value={date}
+                onChange={(event) => setDate(event.target.value)}
+                placeholder="결제한 날짜를 선택해 주세요"
+              ></Form.Control>
+            </StyledGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <StyledGroup>
+              <Form.Control
+                type="text"
+                name="expenseDescription"
+                value={desc}
+                onChange={(event) => setDesc(event.target.value)}
+                placeholder="비용에 대한 설명을 입력해 주세요"
+                isValid={isDescValid}
+                isInvalid={!isDescValid && formValidate}
+              ></Form.Control>
+              <Form.Control.Feedback type="invalid" data-valid={isDescValid}>
+                비용 내용을 입력해 주셔야 됩니다.
+              </Form.Control.Feedback>
+            </StyledGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} lg={6}>
+            <StyledGroup>
+              <Form.Control
+                type="number"
+                name="expenseAmount"
+                value={amount}
+                onChange={(event) => setAmount(event.target.value)}
+                placeholder="비용은 얼마였나요?"
+                isValid={isAmountValid}
+                isInvalid={!isAmountValid && formValidate}
+              ></Form.Control>
+              <Form.Control.Feedback type="invalid" data-valid={isAmountValid}>
+                금액을 입력해 주셔야 합니다.
+              </Form.Control.Feedback>
+            </StyledGroup>
+          </Col>
+          <Col xs={12} lg={6}>
+            <StyledGroup>
+              <Form.Select
+                name="expensePayer"
+                defaultValue=""
+                isValid={isPayerValid}
+                isInvalid={!isPayerValid && formValidate}
+                onChange={(event) => setPayer(event.target.value)}
+              >
+                <option disabled value="">
+                  누가 결제했나요?
+                </option>
+                {members.map((member) => (
+                  <option key={member} value={member}>
+                    {member}
                   </option>
-                  {members.map((member) => (
-                    <option key={member} value={member}>
-                      {member}
-                    </option>
-                  ))}
-                </Form.Select>
-                <Form.Control.Feedback type="invalid" data-valid={isPayerValid}>
-                  결제자를 선택해 주셔야 합니다.
-                </Form.Control.Feedback>
-              </StyledGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} className="d-grid gap-2">
-              <StyledSubmitButton type="submit">추가하기</StyledSubmitButton>
-            </Col>
-          </Row>
-        </Form>
-      </StylesWrapper>
-    </div>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid" data-valid={isPayerValid}>
+                결제자를 선택해 주셔야 합니다.
+              </Form.Control.Feedback>
+            </StyledGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} className="d-grid gap-2">
+            <StyledSubmitButton type="submit">추가하기</StyledSubmitButton>
+          </Col>
+        </Row>
+      </Form>
+    </StylesWrapper>
   );
 };
 
@@ -175,7 +170,7 @@ const StyledGroup = styled(Form.Group)`
   margin-bottom: 18px;
 `;
 
-const StyledTitle = styled.h3`
+export const StyledTitle = styled.h3`
   color: #fffbf9;
   text-align: center;
   letter-spacing: 0.25px;
